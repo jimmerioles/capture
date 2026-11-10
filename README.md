@@ -1,5 +1,7 @@
 # Capture — the page is the screenshot (prototype)
 
+**Live demo:** https://jimmerioles.github.io/capture/
+
 A one-screen landing page for a screenshot-and-annotation tool whose demo captures itself. The product preview is drawn in Canvas 2D; pressing the shutter turns that live drawing into a frozen bitmap, then lets you select, annotate, and export it without leaving the page.
 
 ![Capture — the page is the screenshot](docs/capture-idle.webp)
