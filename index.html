@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050810" />
+    <meta
+      name="description"
+      content="Capture turns the page into the screenshot. Freeze a live preview, drag a selection, annotate with arrows, boxes, and blur, then copy or download — without leaving the tab."
+    />
+    <title>Capture — The page is the screenshot.</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23070e1c'/%3E%3Cpath d='M10 5H5v5M22 5h5v5M27 22v5h-5M10 27H5v-5' stroke='%237fe7ff' stroke-width='2.2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%237fe7ff'/%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#capture-station">Skip to the capture demo</a>
+
+    <div class="backdrop" aria-hidden="true">
+      <div class="backdrop-grid"></div>
+      <div class="backdrop-glow"></div>
+      <div class="backdrop-vignette"></div>
+    </div>
+
+    <div class="shell">
+      <header class="site-header">
+        <a class="brand" href="/" aria-label="Capture home">
+          <svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M8.5 3.5H4.5a1 1 0 0 0-1 1v4M15.5 3.5h4a1 1 0 0 1 1 1v4M20.5 15.5v4a1 1 0 0 1-1 1h-4M8.5 20.5h-4a1 1 0 0 1-1-1v-4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.4"
+              stroke-linecap="round"
+            />
+            <circle cx="12" cy="12" r="2.35" fill="currentColor" />
+          </svg>
+          <span class="brand-word">Capture</span>
+          <span class="brand-beta">beta</span>
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <button class="nav-link" id="changelog-open" type="button">
+            Changelog
+          </button>
+          <a
+            class="nav-link nav-download"
+            id="download-link"
+            href="#capture-station"
+          >
+            Download
+            <span class="nav-download-glyph" aria-hidden="true">↓</span>
+          </a>
+          <span class="nav-divider" aria-hidden="true"></span>
+          <button
+            class="sound-toggle"
+            id="sound-toggle"
+            type="button"
+            aria-label="Mute sound"
+            aria-pressed="false"
+            title="Mute sound"
+          >
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <path
+                d="M3.2 7.7h3.1L10.5 4.8v10.4l-4.2-2.9H3.2z"
+                fill="currentColor"
+              />
+              <path
+                class="sound-wave"
+                d="M13 7.4a3.6 3.6 0 0 1 0 5.2M15.3 5.1a7 7 0 0 1 0 9.8"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.3"
+                stroke-linecap="round"
+              />
+              <path
+                class="sound-slash"
+                d="m12.9 7.8 4.2 4.4m0-4.4-4.2 4.4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.3"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </nav>
+      </header>
+
+      <main class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            <span class="eyebrow-pip" aria-hidden="true"></span>
+            A capture layer for the web
+          </p>
+          <h1 id="hero-title">
+            The page<br />
+            is the
+            <span class="accent"
+              >screenshot<span class="accent-dot">.</span></span
+            >
+          </h1>
+          <p class="lede">
+            Capture what you see, mark what matters, and send it on. Frozen in
+            place — no tabs, no detours, and nothing leaves this tab.
+          </p>
+
+          <ul class="proof-list" aria-label="What Capture does">
+            <li>
+              <svg viewBox="0 0 16 16" aria-hidden="true">
+                <path
+                  d="M5.5 2.5H3.5a1 1 0 0 0-1 1v2M10.5 2.5h2a1 1 0 0 1 1 1v2M13.5 10.5v2a1 1 0 0 1-1 1h-2M5.5 13.5h-2a1 1 0 0 1-1-1v-2"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.15"
+                  stroke-linecap="round"
+                />
+                <circle cx="8" cy="8" r="1.4" fill="currentColor" />
+              </svg>
+              <span><strong>Pixel-true</strong> canvas capture</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 16 16" aria-hidden="true">
+                <rect
+                  x="2.2"
+                  y="2.2"
+                  width="4"
+                  height="4"
+                  rx="0.8"
+                  fill="currentColor"
+                  opacity="0.85"
+                />
+                <rect
+                  x="9.8"
+                  y="2.2"
+                  width="4"
+                  height="4"
+                  rx="0.8"
+                  fill="currentColor"
+                  opacity="0.4"
+                />
+                <rect
+                  x="2.2"
+                  y="9.8"
+                  width="4"
+                  height="4"
+                  rx="0.8"
+                  fill="currentColor"
+                  opacity="0.4"
+                />
+                <rect
+                  x="9.8"
+                  y="9.8"
+                  width="4"
+                  height="4"
+                  rx="0.8"
+                  fill="currentColor"
+                  opacity="0.7"
+                />
+              </svg>
+              <span><strong>Blur</strong> the sensitive bits</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 16 16" aria-hidden="true">
+                <rect
+                  x="3.1"
+                  y="6.7"
+                  width="9.8"
+                  height="7"
+                  rx="1.6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.15"
+                />
+                <path
+                  d="M5.3 6.7V5.1a2.7 2.7 0 0 1 5.4 0v1.6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.15"
+                  stroke-linecap="round"
+                />
+                <circle cx="8" cy="10.2" r="1" fill="currentColor" />
+              </svg>
+              <span><strong>Local</strong> by default</span>
+            </li>
+          </ul>
+        </div>
+
+        <section class="station" id="capture-station" aria-label="Capture demo">
+          <div class="station-chrome">
+            <span class="chrome-status">
+              <span
+                class="status-dot"
+                id="status-dot"
+                aria-hidden="true"
+              ></span>
+              <span id="status-text">Live preview</span>
+            </span>
+            <span class="chrome-meta">
+              <span id="canvas-size">— × —</span>
+              <span class="chrome-slash" aria-hidden="true">/</span>
+              <span id="canvas-dpr">—</span>
+            </span>
+          </div>
+
+          <div class="stage-frame">
+            <span class="cropmark cropmark-tl" aria-hidden="true"></span>
+            <span class="cropmark cropmark-tr" aria-hidden="true"></span>
+            <span class="cropmark cropmark-bl" aria-hidden="true"></span>
+            <span class="cropmark cropmark-br" aria-hidden="true"></span>
+            <div class="stage" id="stage">
+              <canvas
+                class="surface surface-live"
+                id="live-canvas"
+                role="img"
+                aria-label="A live preview of Northstar, a sample analytics app with metrics, a signal chart, and review notes. Capture it with the shutter below."
+              ></canvas>
+              <canvas
+                class="surface surface-snapshot"
+                id="snapshot-canvas"
+                tabindex="-1"
+                aria-label="Captured preview. Drag to select an area, then annotate, copy, or download."
+              ></canvas>
+              <div
+                class="capture-flash"
+                id="capture-flash"
+                aria-hidden="true"
+              ></div>
+
+              <div class="capture-prompt" id="capture-prompt" hidden>
+                <span class="prompt-icon" aria-hidden="true">
+                  <svg viewBox="0 0 20 20">
+                    <circle cx="10" cy="10" r="2.1" fill="currentColor" />
+                    <path
+                      d="M10 3v2.4M10 14.6V17M3 10h2.4M14.6 10H17"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.2"
+                      stroke-linecap="round"
+                    />
+                    <circle
+                      cx="10"
+                      cy="10"
+                      r="6.2"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1"
+                      stroke-dasharray="1.5 3"
+                      opacity="0.6"
+                    />
+                  </svg>
+                </span>
+                <span class="prompt-copy">
+                  <strong>Drag to select an area</strong>
+                  <span>Then annotate, copy, or download.</span>
+                </span>
+              </div>
+
+              <div
+                class="selection-tag"
+                id="selection-tag"
+                hidden
+                aria-hidden="true"
+              ></div>
+
+              <div
+                class="toolbar"
+                id="toolbar"
+                role="toolbar"
+                aria-label="Capture tools"
+                hidden
+              >
+                <div
+                  class="toolbar-group"
+                  role="group"
+                  aria-label="Annotation tools"
+                >
+                  <button
+                    class="tool"
+                    type="button"
+                    data-tool="select"
+                    aria-label="Select area"
+                    aria-keyshortcuts="V"
+                    aria-pressed="true"
+                    title="Select area (V)"
+                  >
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <path
+                        d="M5 2.9 16 10l-5.2 1.2-2.4 4.9L5 2.9Z"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.35"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    <span class="tool-label">Select</span>
+                  </button>
+                  <button
+                    class="tool"
+                    type="button"
+                    data-tool="arrow"
+                    aria-label="Draw an arrow"
+                    aria-keyshortcuts="A"
+                    aria-pressed="false"
+                    title="Arrow (A)"
+                  >
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <path
+                        d="M4 16 16 4M9.5 4H16v6.5"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    <span class="tool-label">Arrow</span>
+                  </button>
+                  <button
+                    class="tool"
+                    type="button"
+                    data-tool="box"
+                    aria-label="Draw a box"
+                    aria-keyshortcuts="R"
+                    aria-pressed="false"
+                    title="Box (R)"
+                  >
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <rect
+                        x="3.6"
+                        y="3.6"
+                        width="12.8"
+                        height="12.8"
+                        rx="1.6"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.35"
+                      />
+                    </svg>
+                    <span class="tool-label">Box</span>
+                  </button>
+                  <button
+                    class="tool"
+                    type="button"
+                    data-tool="blur"
+                    aria-label="Blur an area"
+                    aria-keyshortcuts="B"
+                    aria-pressed="false"
+                    title="Blur (B)"
+                  >
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <rect
+                        x="3.2"
+                        y="3.2"
+                        width="5.2"
+                        height="5.2"
+                        rx="0.9"
+                        fill="currentColor"
+                        opacity="0.9"
+                      />
+                      <rect
+                        x="11.6"
+                        y="3.2"
+                        width="5.2"
+                        height="5.2"
+                        rx="0.9"
+                        fill="currentColor"
+                        opacity="0.35"
+                      />
+                      <rect
+                        x="3.2"
+                        y="11.6"
+                        width="5.2"
+                        height="5.2"
+                        rx="0.9"
+                        fill="currentColor"
+                        opacity="0.35"
+                      />
+                      <rect
+                        x="11.6"
+                        y="11.6"
+                        width="5.2"
+                        height="5.2"
+                        rx="0.9"
+                        fill="currentColor"
+                        opacity="0.7"
+                      />
+                    </svg>
+                    <span class="tool-label">Blur</span>
+                  </button>
+                </div>
+
+                <span class="toolbar-divider" aria-hidden="true"></span>
+
+                <div
+                  class="toolbar-group toolbar-actions"
+                  role="group"
+                  aria-label="Save and reset"
+                >
+                  <button
+                    class="tool tool-primary"
+                    id="copy-button"
+                    type="button"
+                    aria-label="Copy capture to clipboard"
+                    title="Copy image"
+                  >
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <rect
+                        x="6.4"
+                        y="6.4"
+                        width="9.4"
+                        height="9.4"
+                        rx="1.6"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.35"
+                      />
+                      <path
+                        d="M13.6 6.4V5.7a1.7 1.7 0 0 0-1.7-1.7H5.7A1.7 1.7 0 0 0 4 5.7v6.2a1.7 1.7 0 0 0 1.7 1.7h.7"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.35"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                    <span class="tool-label">Copy</span>
+                  </button>
+                  <button
+                    class="tool"
+                    id="download-button"
+                    type="button"
+                    aria-label="Download capture as a PNG"
+                    title="Download PNG"
+                  >
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <path
+                        d="M10 3v9m0 0 3.4-3.4M10 12 6.6 8.6M4 14.3v1.4a1.3 1.3 0 0 0 1.3 1.3h9.4a1.3 1.3 0 0 0 1.3-1.3v-1.4"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.35"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    <span class="tool-label">Download</span>
+                  </button>
+                  <button
+                    class="tool tool-ghost"
+                    id="reset-button"
+                    type="button"
+                    aria-label="Reset capture and return to the live preview"
+                    title="Reset capture (Esc)"
+                  >
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <path
+                        d="M4.2 9.4A6.1 6.1 0 1 0 5.9 5.2M4 3.6v4.8h4.8"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.35"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    <span class="tool-label">Reset</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="station-caption">
+            <span class="station-caption-left">
+              <span class="caption-bar" aria-hidden="true"></span>
+              Northstar / Weekly review
+            </span>
+            <span class="station-caption-right"
+              >Sample UI · rendered in Canvas 2D</span
+            >
+          </div>
+
+          <div class="station-controls">
+            <div class="idle-controls" id="idle-controls">
+              <button
+                class="shutter"
+                id="shutter"
+                type="button"
+                aria-label="Capture the preview"
+                aria-keyshortcuts="C"
+              >
+                <span class="shutter-ring" aria-hidden="true"></span>
+                <span class="shutter-cap" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M8 3.8H4.8a1 1 0 0 0-1 1V8M16 3.8h3.2a1 1 0 0 1 1 1V8M20.2 16v3.2a1 1 0 0 1-1 1H16M8 20.2H4.8a1 1 0 0 1-1-1V16"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    />
+                    <circle cx="12" cy="12" r="2.7" fill="currentColor" />
+                  </svg>
+                </span>
+              </button>
+              <div class="shutter-copy">
+                <span class="shutter-title">Capture this screen</span>
+                <span class="shutter-hint"
+                  >Click to capture
+                  <span class="hint-dot" aria-hidden="true">·</span>
+                  <kbd>C</kbd></span
+                >
+              </div>
+              <div class="shutter-local" aria-hidden="true">
+                <svg viewBox="0 0 16 16">
+                  <rect
+                    x="3.2"
+                    y="6.8"
+                    width="9.6"
+                    height="6.8"
+                    rx="1.5"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.1"
+                  />
+                  <path
+                    d="M5.4 6.8V5.2a2.6 2.6 0 0 1 5.2 0v1.6"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.1"
+                  />
+                </svg>
+                Frozen locally
+              </div>
+            </div>
+
+            <div class="captured-controls" id="captured-controls" hidden>
+              <span class="captured-icon" aria-hidden="true">
+                <svg viewBox="0 0 20 20">
+                  <path
+                    d="M10 3v2.4M10 14.6V17M3 10h2.4M14.6 10H17"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.2"
+                    stroke-linecap="round"
+                  />
+                  <circle
+                    cx="10"
+                    cy="10"
+                    r="3.1"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.25"
+                  />
+                </svg>
+              </span>
+              <div class="captured-copy">
+                <span class="captured-title">Frozen. Now mark it up.</span>
+                <span class="captured-hint" id="captured-hint"
+                  >Drag to select an area, or pick a tool above.</span
+                >
+              </div>
+              <button class="exit-capture" id="exit-capture" type="button">
+                <kbd>Esc</kbd>
+                <span>Exit</span>
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <span class="footer-left"
+          >Capture <span class="footer-dim">/ Prototype</span></span
+        >
+        <span class="footer-mid">Canvas 2D · Web Audio · Zero uploads</span>
+        <span class="footer-right">
+          <kbd>C</kbd> capture
+          <span class="footer-sep" aria-hidden="true">·</span>
+          <kbd>Esc</kbd> exit
+        </span>
+      </footer>
+    </div>
+
+    <dialog
+      class="changelog-dialog"
+      id="changelog-dialog"
+      aria-labelledby="changelog-title"
+    >
+      <div class="dialog-head">
+        <div>
+          <p class="dialog-eyebrow">Changelog</p>
+          <h2 id="changelog-title">Capture, v0.1</h2>
+        </div>
+        <form method="dialog">
+          <button class="dialog-close" aria-label="Close changelog">
+            <svg viewBox="0 0 20 20" aria-hidden="true">
+              <path
+                d="m5 5 10 10M15 5 5 15"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+        </form>
+      </div>
+      <ol class="dialog-list">
+        <li>
+          <span class="dialog-version">0.1.0</span>
+          <div>
+            <strong>The first freeze.</strong>
+            <p>
+              Canvas capture, drag selection, arrows, boxes, and pixel blur.
+              Copy it or save a PNG — all local.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="dialog-version">Next</span>
+          <div>
+            <strong>More ways to mark it up.</strong>
+            <p>
+              Text callouts, undo history, pinned captures, and a real desktop
+              share sheet are in the queue.
+            </p>
+          </div>
+        </li>
+      </ol>
+      <p class="dialog-foot">
+        Prototype build. No account, no server, no uploads.
+      </p>
+    </dialog>
+
+    <div
+      class="toast"
+      id="toast"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      <span class="toast-icon" aria-hidden="true">
+        <svg class="toast-check" viewBox="0 0 16 16">
+          <path
+            d="m3.5 8.5 2.8 2.8 6.2-6.4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <svg class="toast-alert" viewBox="0 0 16 16">
+          <path
+            d="M8 4.2v4.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+          />
+          <circle cx="8" cy="11.6" r="1" fill="currentColor" />
+        </svg>
+      </span>
+      <span class="toast-message" id="toast-message">Copied</span>
+    </div>
+
+    <div class="sr-only" id="live-region" aria-live="polite"></div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
