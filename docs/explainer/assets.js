@@ -1,0 +1,20 @@
+// Captures from the real page, taken by docs/explainer/capture.mjs.
+export const ASSETS = {
+  page: "/project/assets/page-idle.png",
+  station: "/project/assets/station-idle.png",
+  stage: "/project/assets/stage-idle.png",
+  bitmap: "/project/assets/bitmap.png",
+  frozen: "/project/assets/bitmap.png",
+  stageFrozen: "/project/assets/stage-frozen.png",
+  stationFrozen: "/project/assets/station-frozen.png",
+  selected: "/project/assets/stage-selected.png",
+  stationSelected: "/project/assets/station-selected.png",
+  arrow: "/project/assets/stage-arrow.png",
+  box: "/project/assets/stage-box.png",
+  annotated: "/project/assets/stage-annotated.png",
+  stationAnnotated: "/project/assets/station-annotated.png",
+  toolbar: "/project/assets/toolbar.png",
+  export: "/project/assets/export.png",
+  mobile: "/project/assets/page-mobile.png",
+  stationMobile: "/project/assets/station-mobile.png",
+};

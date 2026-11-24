@@ -6,6 +6,49 @@ A one-screen landing page for a screenshot-and-annotation tool whose demo captur
 
 ![Capture — the page is the screenshot](docs/capture-idle.webp)
 
+## The film
+
+![Capture, explained](docs/explainer/poster.jpg)
+
+https://github.com/user-attachments/assets/e07feeff-335b-4fbd-a69d-9e266425c033
+
+**Capture, explained** is a 3:09 visual essay in ten chapters, narrated by Kokoro `af_heart` and scored with the house `tech` bed (MIT licensed). It follows one shutter press: the canvas freeze, the selection, three marks, the native-resolution PNG, the synthesized shutter, the frame clock, and the quiet defaults. The product you see on screen is the real prototype, captured at 2× and animated in Canvas.
+
+The finished film is built to `docs/explainer/build/film.mp4` (1920 × 1080, 30 fps, H.264, AAC, -16 LUFS). The poster is `docs/explainer/poster.jpg`. The MP4 is a build artifact and is not committed; the inline player above is a GitHub user attachment, and the release carries a downloadable copy.
+
+The content lives with the project:
+
+| File | Role |
+| --- | --- |
+| `docs/explainer/config.json` | Title, voice, accent, music bed, capture target, verify frame |
+| `docs/explainer/script.json` | Ten chapters, one idea each |
+| `docs/explainer/scenes.js` | The diagrams and the cut |
+| `docs/explainer/capture.mjs` | Real captures of the page at 2× |
+| `docs/explainer/build/script.md` | The companion script with chapter times |
+| `docs/explainer/build/report.json` | The verification report |
+
+Rebuild with [explainer-kit](https://github.com/jimmerioles/explainer-kit) 1.1.0. The capture step reads the live page, so keep the dev server running on port 5173 in one shell:
+
+```bash
+npm run dev -- --port 5173
+```
+
+Then build the film in another shell:
+
+```bash
+KIT=~/Work/jimmerioles/explainer-kit
+node $KIT/bin/explainer.mjs narrate
+node $KIT/bin/explainer.mjs capture
+node $KIT/bin/explainer.mjs stills
+node $KIT/bin/explainer.mjs golden
+node $KIT/bin/explainer.mjs render
+node $KIT/bin/explainer.mjs mix
+node $KIT/bin/explainer.mjs master
+node $KIT/bin/explainer.mjs verify
+```
+
+Set `CAPTURE_URL` if the dev server runs on a different port.
+
 This is an original prototype built around a few principles: static-first, one signature interaction, a physical metaphor, and sound only after a gesture. No third-party assets, code, or audio are used.
 
 ## Run it

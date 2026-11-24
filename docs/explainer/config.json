@@ -1,0 +1,30 @@
+{
+  "kit": "1.1.0",
+  "title": "Capture, explained",
+  "slug": "capture",
+  "targetSeconds": 195,
+  "theme": {
+    "accent": "#7fe7ff",
+    "chrome": {
+      "left": "CAPTURE",
+      "center": "THE PAGE IS THE SCREENSHOT",
+      "right": "PROTOTYPE 01"
+    }
+  },
+  "voice": {
+    "engine": "kokoro",
+    "name": "af_heart",
+    "fallback": "af_bella"
+  },
+  "mix": {
+    "bed": "music.m4a"
+  },
+  "capture": {
+    "url": "http://localhost:5173",
+    "selector": "#stage"
+  },
+  "verify": {
+    "frameAt": 6.5,
+    "golden": "golden/frame.png"
+  }
+}

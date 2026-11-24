@@ -1,0 +1,121 @@
+{
+  "title": "Capture, explained",
+  "segments": [
+    {
+      "id": "cold-open",
+      "title": "The page is the screenshot",
+      "sentences": [
+        "This page has a screenshot tool inside it.",
+        "On the right is a live app, drawn on a canvas.",
+        "Press the shutter, and the drawing freezes into a picture.",
+        "Then you mark it up without leaving the tab."
+      ],
+      "notes": "Open on the real page. Push into the capture station. The live Northstar preview breathes. The shutter presses, the flash fires, and the frozen bitmap takes over."
+    },
+    {
+      "id": "freeze",
+      "title": "The freeze",
+      "sentences": [
+        "The preview is not an image.",
+        "It is a canvas, painted fresh thirty times a second.",
+        "The shutter copies its pixels at device resolution into a second canvas.",
+        "The backing bitmap is capped at two and a half times the CSS size.",
+        "The live layer fades, and the copy takes its place."
+      ],
+      "notes": "A pipeline diagram: live canvas, DPR-scaled backing store, offscreen frozen bitmap. The real stage sits beside it. Show 2.5x pixels."
+    },
+    {
+      "id": "selection",
+      "title": "The selection",
+      "sentences": [
+        "The frozen canvas becomes an editor.",
+        "Drag a rectangle, and everything outside it dims.",
+        "Eight handles resize it, and a tag reports the pixel size.",
+        "The rectangle is stored as fractions, so it survives a resize."
+      ],
+      "notes": "Real captured stage. Drag a selection over the signal chart and review notes. Show the eight handles and the 780 x 420 tag. Then a 0..1 normalized coordinate inset."
+    },
+    {
+      "id": "marks",
+      "title": "Three marks",
+      "sentences": [
+        "Three tools mark up the capture.",
+        "Arrow points. Box frames.",
+        "Blur redacts with a mosaic built from the frozen pixels underneath.",
+        "Each mark is stored as geometry, not baked into the image.",
+        "It redraws cleanly at any size."
+      ],
+      "notes": "Draw an arrow to the retention card, a box around the LIVE chip, and a blur over the review note email. Then show the mosaic grid resolving from the frozen bitmap."
+    },
+    {
+      "id": "export",
+      "title": "The clean copy",
+      "sentences": [
+        "Copy and Download do not read the screen.",
+        "They build a clean canvas from the frozen bitmap.",
+        "Annotations go on top, and the selection becomes the crop.",
+        "The veil, the handles, and the toolbar are left behind.",
+        "What you get is a PNG at native resolution."
+      ],
+      "notes": "Pipeline: frozen bitmap plus annotations, crop to selection, clean PNG. Show the real exported PNG as an object, sharper than the display canvas. A 1440-wide screen can produce a 2.5x image."
+    },
+    {
+      "id": "sound",
+      "title": "Made from scratch",
+      "sentences": [
+        "The shutter has a sound, but there is no audio file.",
+        "It is filtered noise, a low thump, and a click.",
+        "The copy chime is three sine notes.",
+        "A soft error tone plays if the clipboard refuses.",
+        "The audio engine starts inside your click, so nothing autoplays."
+      ],
+      "notes": "Three waveforms and envelopes: noise burst, low sine thump, click. Then three chime notes on a staff-like grid. A gesture gate unlocks the AudioContext."
+    },
+    {
+      "id": "clock",
+      "title": "The clock",
+      "sentences": [
+        "The preview breathes at about thirty frames a second.",
+        "The endpoint pulses, the LIVE dot blinks, and a scan crosses the chart.",
+        "Hide the tab, or scroll away, and the loop stops.",
+        "Freeze the image, and the clock stops with it."
+      ],
+      "notes": "One RAF pulse feeding three bars: endpoint, LIVE dot, chart scan. Two gates close: visibility and capture. The bars flatten and the frame holds."
+    },
+    {
+      "id": "no-assets",
+      "title": "Nothing to download",
+      "sentences": [
+        "The preview, the icons, and the sounds are all code.",
+        "No image files. No audio files. No UI library.",
+        "Only the fonts come from outside.",
+        "The app is drawn, not screenshotted.",
+        "So the demo can capture itself with no server in the loop."
+      ],
+      "notes": "An asset ledger: images 0, audio 0, video 0, UI libraries 0, fonts 2. Then lines of Canvas 2D draw calls drawing the Northstar UI."
+    },
+    {
+      "id": "defaults",
+      "title": "The quiet defaults",
+      "sentences": [
+        "The capture still works when the motion stops.",
+        "Reduced motion removes the flash, the shake, and the entrances.",
+        "The freeze becomes a fade, and every tool still works.",
+        "Keyboard users get C, V, A, R, B, and Escape.",
+        "The layout holds on a phone."
+      ],
+      "notes": "Three panels: reduced motion, keyboard map, phone layout using the real 390 x 844 capture. Every claim is visible."
+    },
+    {
+      "id": "close",
+      "title": "The page is the screenshot",
+      "sentences": [
+        "A page that can see itself.",
+        "A screenshot you never have to leave.",
+        "The pixels stay in the tab.",
+        "The page is the screenshot."
+      ],
+      "notes": "Pull back from the frozen frame to the whole page. The crop marks settle around the stage. Final line stands alone, then silence."
+    }
+  ]
+}
