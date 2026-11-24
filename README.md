@@ -10,11 +10,13 @@ A one-screen landing page for a screenshot-and-annotation tool whose demo captur
 
 ![Capture, explained](docs/explainer/poster.jpg)
 
+The full cut plays inline on GitHub.
+
 https://github.com/user-attachments/assets/e07feeff-335b-4fbd-a69d-9e266425c033
 
 **Capture, explained** is a 3:09 visual essay in ten chapters, narrated by Kokoro `af_heart` and scored with the house `tech` bed (MIT licensed). It follows one shutter press: the canvas freeze, the selection, three marks, the native-resolution PNG, the synthesized shutter, the frame clock, and the quiet defaults. The product you see on screen is the real prototype, captured at 2× and animated in Canvas.
 
-The finished film is built to `docs/explainer/build/film.mp4` (1920 × 1080, 30 fps, H.264, AAC, -16 LUFS). The poster is `docs/explainer/poster.jpg`. The MP4 is a build artifact and is not committed; the inline player above is a GitHub user attachment, and the release carries a downloadable copy.
+The finished film is built to `docs/explainer/build/film.mp4` (1920 × 1080, 30 fps, H.264, AAC, -16 LUFS). The poster is `docs/explainer/poster.jpg`. The MP4 is a build artifact and is not committed; the inline player above is a GitHub user attachment, and [the release](https://github.com/jimmerioles/capture/releases/tag/explainer-v1) carries a downloadable copy.
 
 The content lives with the project:
 
