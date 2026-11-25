@@ -1,8 +1,8 @@
-# Capture — the page is the screenshot
+# Capture: the page is the screenshot
 
 A screenshot and annotation tool whose hero captures the page itself.
 
-Click the shutter. The live page freezes into a canvas, the real DOM hides, and you drag a selection over the captured image. Annotate, blur, or peel it away, then shatter it back into the live page. Meta, tactile, and built around the page itself — for a different product.
+Click the shutter. The live page freezes into a canvas, the real DOM hides, and you drag a selection over the captured image. Annotate, blur, or peel it away, then shatter it back into the live page. Meta, tactile, and built around the page itself, for a different product.
 
 ## First build
 

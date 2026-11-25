@@ -142,7 +142,7 @@ kbd {
   transform: translateY(0);
 }
 
-/* Background ------------------------------------------------------------ */
+/* Background */
 
 .backdrop {
   position: fixed;
@@ -224,7 +224,7 @@ kbd {
   opacity: 0.55;
 }
 
-/* Shell and header ------------------------------------------------------ */
+/* Shell and header */
 
 .shell {
   position: relative;
@@ -385,7 +385,7 @@ kbd {
   display: block;
 }
 
-/* Hero ------------------------------------------------------------------ */
+/* Hero */
 
 .hero {
   display: grid;
@@ -499,7 +499,7 @@ h1 {
   font-weight: 500;
 }
 
-/* Capture station ------------------------------------------------------- */
+/* Capture station */
 
 .station {
   width: 100%;
@@ -1153,7 +1153,7 @@ h1 {
   padding: 1px 4px;
 }
 
-/* Footer ---------------------------------------------------------------- */
+/* Footer */
 
 .site-footer {
   display: flex;
@@ -1201,7 +1201,7 @@ h1 {
   color: rgba(141, 177, 239, 0.26);
 }
 
-/* Dialog --------------------------------------------------------------- */
+/* Dialog */
 
 .changelog-dialog {
   width: min(520px, calc(100vw - 32px));
@@ -1334,7 +1334,7 @@ h1 {
   text-transform: uppercase;
 }
 
-/* Toast ---------------------------------------------------------------- */
+/* Toast */
 
 .toast {
   position: fixed;
@@ -1418,7 +1418,7 @@ h1 {
   display: block;
 }
 
-/* Animation ------------------------------------------------------------ */
+/* Animation */
 
 @keyframes pip-pulse {
   0%,
@@ -1535,7 +1535,7 @@ h1 {
   animation-play-state: paused;
 }
 
-/* Responsive ----------------------------------------------------------- */
+/* Responsive */
 
 @media (max-width: 1119px) {
   .site-header {

@@ -49,7 +49,7 @@ const T = {
 
 const TAU = Math.PI * 2;
 
-// ---------------------------------------------------------------- timing
+// timing
 
 function times(sc) {
   return sc.seg.sentences.map((s) => ({
@@ -66,7 +66,7 @@ function head(sc, lt) {
   sceneLabel(sc.seg.title ?? sc.id, M.x, M.top, p);
 }
 
-// ---------------------------------------------------------------- type
+// type
 
 function kicker(str, x, y, color = C.coral, alpha = 1) {
   ctx.save();
@@ -124,7 +124,7 @@ function dottedRule(x1, y1, x2, y2, color = C.line, alpha = 1) {
   line(x1, y1, x2, y2, color, 1, [3, 6], alpha);
 }
 
-// ---------------------------------------------------------------- objects
+// objects
 
 function frame(x, y, w, h, opts = {}) {
   const { r = 16, alpha = 1, color = C.coral, glowA = 0.13 } = opts;
@@ -353,7 +353,7 @@ function minimap(x, y, w, h, opts = {}) {
   ctx.restore();
 }
 
-// ---------------------------------------------------------------- audio traces
+// audio traces
 
 function hashNoise(n) {
   const s = Math.sin(n * 127.1 + 311.7) * 43758.5453;
@@ -422,7 +422,7 @@ function errorTone(p) {
   return Math.sin(p * TAU * freq) * env * 0.8;
 }
 
-// ---------------------------------------------------------------- scene 01
+// scene 01
 
 function coldOpen(lt, sc) {
   const s = times(sc);
@@ -585,7 +585,7 @@ function coldOpen(lt, sc) {
   }
 }
 
-// ---------------------------------------------------------------- scene 02
+// scene 02
 
 function freeze(lt, sc) {
   const s = times(sc);
@@ -798,7 +798,7 @@ function freeze(lt, sc) {
   }
 }
 
-// ---------------------------------------------------------------- scene 03
+// scene 03
 
 function selection(lt, sc) {
   const s = times(sc);
@@ -939,7 +939,7 @@ function selection(lt, sc) {
   }
 }
 
-// ---------------------------------------------------------------- scene 04
+// scene 04
 
 function marks(lt, sc) {
   const s = times(sc);
@@ -1197,7 +1197,7 @@ function drawMiniMarks(x, y, w, h, scale = 1) {
   ctx.restore();
 }
 
-// ---------------------------------------------------------------- scene 05
+// scene 05
 
 function drawCleanMarks(x, y, w, h, alpha = 1) {
   const ax = x + 0.17 * w;
@@ -1495,7 +1495,7 @@ function exportScene(lt, sc) {
   }
 }
 
-// ---------------------------------------------------------------- scene 06
+// scene 06
 
 function soundScene(lt, sc) {
   const s = times(sc);
@@ -1691,7 +1691,7 @@ function soundScene(lt, sc) {
   }
 }
 
-// ---------------------------------------------------------------- scene 07
+// scene 07
 
 function clockScene(lt, sc) {
   const s = times(sc);
@@ -1869,7 +1869,7 @@ function clockScene(lt, sc) {
   }
 }
 
-// ---------------------------------------------------------------- scene 08
+// scene 08
 
 function noAssets(lt, sc) {
   const s = times(sc);
@@ -2137,7 +2137,7 @@ function noAssets(lt, sc) {
   }
 }
 
-// ---------------------------------------------------------------- scene 09
+// scene 09
 
 function defaults(lt, sc) {
   const s = times(sc);
@@ -2373,7 +2373,7 @@ function defaults(lt, sc) {
   }
 }
 
-// ---------------------------------------------------------------- scene 10
+// scene 10
 
 function closeScene(lt, sc) {
   const s = times(sc);
@@ -2516,7 +2516,7 @@ function closeScene(lt, sc) {
   }
 }
 
-// ---------------------------------------------------------------- export
+// export
 
 export const SCENES = {
   "cold-open": coldOpen,

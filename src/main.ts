@@ -295,7 +295,7 @@ async function copyCapture(): Promise<void> {
       const blob = await blobPromise;
       triggerDownload(blob, filename);
       audio.playChime();
-      showToast("Clipboard blocked — downloaded instead", "warn");
+      showToast("Clipboard blocked. Downloaded instead.", "warn");
     } catch (fallbackError) {
       console.error("Capture: copy failed.", fallbackError);
       audio.playError();
@@ -395,7 +395,7 @@ changelogDialog.addEventListener("click", (event) => {
 
 downloadLink.addEventListener("click", (event) => {
   event.preventDefault();
-  showToast("Desktop app coming soon — capture right here.", "warn");
+  showToast("Desktop app coming soon. Capture right here.", "warn");
 });
 
 document.addEventListener("keydown", (event) => {
