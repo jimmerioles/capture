@@ -39,3 +39,7 @@ The shutter is a real button, the toolbar supports arrow-key navigation, and an 
 - There is no per-mark undo. Reset discards the whole capture.
 - The prototype captures its own canvas, not the full page or the OS.
 - Image clipboard support varies by browser and requires a secure context.
+
+## Case study
+
+`case-study/` is a separate static entry built by Vite alongside the demo. It shares no runtime code with the app. Its screenshots and film poster live in `public/case-study/`, and its copy is plain HTML in `case-study/index.html`. The page links back to the demo, and the demo header links to the case study.

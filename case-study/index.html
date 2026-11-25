@@ -1,0 +1,1301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050810" />
+    <meta
+      name="description"
+      content="Capture is a screenshot and annotation prototype whose demo captures itself. A case study on the freeze, the marks, the export, and the limits of a page that can see itself."
+    />
+    <title>Capture case study: The page is the screenshot</title>
+    <meta property="og:title" content="Capture case study: The page is the screenshot" />
+    <meta
+      property="og:description"
+      content="A screenshot and annotation prototype whose demo captures itself. How the freeze works, where the marks come from, and what the prototype does not claim."
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Capture" />
+    <meta
+      property="og:url"
+      content="https://jimmerioles.github.io/capture/case-study/"
+    />
+    <meta
+      property="og:image"
+      content="https://jimmerioles.github.io/capture/case-study/og.jpg"
+    />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="675" />
+    <meta
+      property="og:image:alt"
+      content="The Capture page with a live Northstar analytics preview and a shutter below it."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23070e1c'/%3E%3Cpath d='M10 5H5v5M22 5h5v5M27 22v5h-5M10 27H5v-5' stroke='%237fe7ff' stroke-width='2.2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='3' fill='%237fe7ff'/%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="cs-page">
+    <a class="cs-skip" href="#case-study-main">Skip to the case study</a>
+
+    <header class="cs-topbar" aria-label="Case study">
+      <a class="cs-brand" href="../" aria-label="Capture home">
+        <svg class="cs-brand__mark" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M8.5 3.5H4.5a1 1 0 0 0-1 1v4M15.5 3.5h4a1 1 0 0 1 1 1v4M20.5 15.5v4a1 1 0 0 1-1 1h-4M8.5 20.5h-4a1 1 0 0 1-1-1v-4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.4"
+            stroke-linecap="round"
+          />
+          <circle cx="12" cy="12" r="2.35" fill="currentColor" />
+        </svg>
+        <span class="cs-brand__word">Capture</span>
+        <span class="cs-brand__divider" aria-hidden="true"></span>
+        <span class="cs-brand__section">Case study</span>
+      </a>
+
+      <a class="cs-back" href="../" aria-label="Back to the demo">
+        <svg viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M10.5 3.5 6 8l4.5 4.5" />
+        </svg>
+        <span>Back to the demo</span>
+      </a>
+
+      <div class="cs-progress" aria-hidden="true">
+        <span class="cs-progress__bar" data-progress></span>
+      </div>
+    </header>
+
+    <main id="case-study-main" class="cs-main" tabindex="-1">
+      <article>
+        <header class="cs-hero">
+          <div class="cs-shell">
+            <p class="cs-kicker">
+              <span class="cs-kicker__dot" aria-hidden="true"></span>
+              Canvas 2D &middot; Case study
+            </p>
+
+            <h1 class="cs-hero__title">
+              The page<br />
+              is the <span class="cs-accent">screenshot<span class="cs-accent__dot">.</span></span>
+            </h1>
+
+            <p class="cs-hero__lede">
+              Capture is a screenshot and annotation prototype whose demo
+              captures itself. The live preview is drawn in Canvas 2D. The
+              shutter copies its actual pixels at device resolution, freezes
+              them in place, and turns the same stage into an editor. No
+              extension, no upload, no second app.
+            </p>
+
+            <div class="cs-hero__bottom">
+              <div class="cs-actions">
+                <a class="cs-button cs-button--primary" href="../">
+                  <span>Open the demo</span>
+                  <svg viewBox="0 0 16 16" aria-hidden="true">
+                    <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6" />
+                  </svg>
+                </a>
+                <a
+                  class="cs-button cs-button--ghost"
+                  href="#film-video"
+                  data-focus-target="film-video"
+                >
+                  <span>Watch the film</span>
+                  <svg viewBox="0 0 16 16" aria-hidden="true">
+                    <path d="M8 3v9M4.5 8.5 8 12l3.5-3.5" />
+                  </svg>
+                </a>
+              </div>
+
+              <dl class="cs-facts">
+                <div>
+                  <dt>Role</dt>
+                  <dd>Product design and frontend</dd>
+                </div>
+                <div>
+                  <dt>Stack</dt>
+                  <dd>TypeScript, Vite, Canvas 2D</dd>
+                </div>
+                <div>
+                  <dt>Surface</dt>
+                  <dd>One page, no framework</dd>
+                </div>
+                <div>
+                  <dt>Status</dt>
+                  <dd>v0.1, November 2026</dd>
+                </div>
+              </dl>
+            </div>
+
+            <figure class="cs-figure cs-figure--hero">
+              <div class="cs-frame cs-frame--hero">
+                <div class="cs-frame__bar">
+                  <span class="cs-frame__status">
+                    <span class="cs-frame__dot" aria-hidden="true"></span>
+                    Live preview
+                  </span>
+                  <span class="cs-frame__meta">1440 &times; 900 / 2.0&times;</span>
+                </div>
+                <div class="cs-frame__image">
+                  <span class="cs-crop cs-crop--tl" aria-hidden="true"></span>
+                  <span class="cs-crop cs-crop--tr" aria-hidden="true"></span>
+                  <span class="cs-crop cs-crop--bl" aria-hidden="true"></span>
+                  <span class="cs-crop cs-crop--br" aria-hidden="true"></span>
+                  <img
+                    src="%BASE_URL%case-study/page.webp"
+                    alt="The Capture page at 1440 by 900. The left side has the headline The page is the screenshot and three proof points. The right side has a live Northstar analytics preview with a shutter below it."
+                    width="2000"
+                    height="1250"
+                    fetchpriority="high"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+              <figcaption>
+                The whole page at 1440 &times; 900 and 2&times;. The preview on
+                the right is a canvas, not an image. The shutter below it starts
+                the freeze.
+              </figcaption>
+            </figure>
+          </div>
+        </header>
+
+        <div class="cs-shell">
+          <nav class="cs-index" aria-label="Case study sections">
+            <a href="#problem"><span>01</span> The problem</a>
+            <a href="#idea"><span>02</span> The idea</a>
+            <a href="#film"><span>03</span> The film</a>
+            <a href="#architecture"><span>04</span> Architecture</a>
+            <a href="#marks"><span>05</span> The marks</a>
+            <a href="#performance"><span>06</span> Performance</a>
+            <a href="#access"><span>07</span> Access</a>
+            <a href="#limits"><span>08</span> Limits</a>
+            <a href="#next"><span>09</span> What is next</a>
+          </nav>
+
+          <div class="cs-sections">
+            <section class="cs-section" id="problem" aria-labelledby="problem-title">
+              <div class="cs-section__aside">
+                <span class="cs-section__number">01</span>
+                <p class="cs-kicker">The problem</p>
+              </div>
+              <div class="cs-section__body">
+                <h2 id="problem-title">
+                  Every screenshot tool starts by leaving the page.
+                </h2>
+                <p class="cs-lede">
+                  The OS shortcut opens a markup window. The extension asks for
+                  permission to read every tab. The upload service wants the
+                  image on its server before it can be annotated. The page is
+                  always the input, never the tool.
+                </p>
+                <p>
+                  That split is familiar, and it costs three things. The pixels
+                  are often captured at display resolution. The markup happens
+                  in another context. And the file usually takes a detour
+                  through a second app or someone else&rsquo;s storage.
+                </p>
+                <p>
+                  Capture starts from a different premise. The page already has
+                  a renderer, pixels, a clipboard, and a download path. It can
+                  do the whole job itself.
+                </p>
+
+                <ul class="cs-list">
+                  <li>
+                    <strong>OS capture.</strong> Fast and universal, but the
+                    edit happens in a separate window, and the result is a file
+                    you now have to manage.
+                  </li>
+                  <li>
+                    <strong>A browser extension.</strong> One click and the
+                    viewport is yours, at the cost of a permission surface and,
+                    usually, a separate editor.
+                  </li>
+                  <li>
+                    <strong>Upload and annotate.</strong> Good for sharing and
+                    collaboration, but the image leaves the machine before the
+                    first arrow is drawn.
+                  </li>
+                </ul>
+
+                <p>
+                  Each one treats the page as input. Capture treats the page as
+                  the camera.
+                </p>
+
+                <div class="cs-compare">
+                  <h3>A different place to do the work.</h3>
+                  <p class="cs-compare__intro">
+                    The comparison is not about features. It is about where the
+                    pixels live and who holds them.
+                  </p>
+                  <table>
+                    <caption class="cs-sr-only">
+                      A comparison of an external screenshot tool and Capture
+                      for where it runs, what it captures, the edit, the data
+                      path, and setup
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">Criterion</th>
+                        <th scope="col">Outside the page</th>
+                        <th scope="col">Capture</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">Where it runs</th>
+                        <td data-label="Outside the page">
+                          An OS tool, an extension, or a separate app.
+                        </td>
+                        <td data-label="Capture">
+                          In the page, on the same stage as the preview.
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">What it captures</th>
+                        <td data-label="Outside the page">
+                          The viewport, a window, or a tab, usually at display
+                          resolution.
+                        </td>
+                        <td data-label="Capture">
+                          The live canvas backing store, up to 2.5&times; the
+                          CSS size.
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">The edit</th>
+                        <td data-label="Outside the page">
+                          A second editor, sometimes after a save or an upload.
+                        </td>
+                        <td data-label="Capture">
+                          The same stage, immediately after the freeze.
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">The data path</th>
+                        <td data-label="Outside the page">
+                          A file, a clipboard, or a server.
+                        </td>
+                        <td data-label="Capture">
+                          Clipboard or local download. Nothing is sent.
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Setup</th>
+                        <td data-label="Outside the page">
+                          An install or a permission prompt.
+                        </td>
+                        <td data-label="Capture">Open the page.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+
+            <section class="cs-section" id="idea" aria-labelledby="idea-title">
+              <div class="cs-section__aside">
+                <span class="cs-section__number">02</span>
+                <p class="cs-kicker">The idea</p>
+              </div>
+              <div class="cs-section__body">
+                <h2 id="idea-title">A demo that can see itself.</h2>
+                <p class="cs-lede">
+                  The subject is Northstar, a fictional analytics app drawn
+                  entirely with Canvas 2D: cards, charts, type, the pulsing
+                  endpoint, all of it.
+                </p>
+                <p>
+                  The demo is not a screenshot of an app. It is a live drawing,
+                  repainted roughly thirty times a second. That matters because
+                  the shutter copies the actual backing store. The capture is
+                  not a re-render or a reconstruction. It is the same pixels the
+                  browser just painted.
+                </p>
+                <p>
+                  Then the stage changes jobs. The live layer fades, the frozen
+                  bitmap takes over, and the toolbar appears on the same
+                  rectangle. There is no mode switch to another screen, no file
+                  picker, no upload. The page is the subject, the camera, and
+                  the editor.
+                </p>
+
+                <div class="cs-statement">
+                  <p class="cs-statement__label">The premise</p>
+                  <p>The demo is the subject. The capture is real.</p>
+                </div>
+
+                <p>
+                  This is the part that is hard to fake in a mockup. The tool is
+                  not describing a capture workflow. It is running one.
+                </p>
+                <p>
+                  The app is deliberately small: four TypeScript modules, one
+                  HTML file, one stylesheet, no runtime framework. The
+                  interesting part is not the amount of code. It is where the
+                  pixels come from.
+                </p>
+              </div>
+            </section>
+
+            <section class="cs-section" id="film" aria-labelledby="film-title">
+              <div class="cs-section__aside">
+                <span class="cs-section__number">03</span>
+                <p class="cs-kicker">The walkthrough</p>
+              </div>
+              <div class="cs-section__body">
+                <h2 id="film-title">One shutter press, three minutes.</h2>
+                <p class="cs-lede">
+                  The film runs 3:09. Its product footage is the real prototype,
+                  captured at 2&times;. It covers the freeze, the selection, the
+                  three marks, the export, the audio, the clock, the zero-asset
+                  build, and the quiet defaults.
+                </p>
+
+                <div class="cs-walkthrough">
+                  <div class="cs-filmcol">
+                    <figure class="cs-film">
+                      <div class="cs-film__bar">
+                        <span>Capture, explained</span>
+                        <span>3:09 / 1920 &times; 1080</span>
+                      </div>
+                      <video
+                        id="film-video"
+                        controls
+                        preload="none"
+                        playsinline
+                        aria-label="Capture, explained. A three minute and nine second film about the prototype."
+                        poster="%BASE_URL%case-study/poster.webp"
+                        width="1920"
+                        height="1080"
+                      >
+                        <source
+                          src="https://github.com/user-attachments/assets/fba03b95-8b0f-4b64-9eef-cec0216a7a8a"
+                          type="video/mp4"
+                        />
+                        Your browser cannot play this film.
+                        <a
+                          href="https://github.com/jimmerioles/capture/releases/tag/explainer-v1"
+                          >Download it from the release.</a
+                        >
+                      </video>
+                      <figcaption>
+                        Narrated, scored, and built around real captures at
+                        2&times;. The production notes live in
+                        <code>docs/explainer/</code>.
+                      </figcaption>
+                    </figure>
+
+                    <p class="cs-film__links">
+                      <a
+                        href="https://github.com/jimmerioles/capture/releases/tag/explainer-v1"
+                        target="_blank"
+                        rel="noreferrer"
+                        >Download the film</a
+                      >
+                      <span aria-hidden="true">/</span>
+                      <a
+                        href="https://github.com/jimmerioles/capture"
+                        target="_blank"
+                        rel="noreferrer"
+                        >Source on GitHub</a
+                      >
+                      <span aria-hidden="true">/</span>
+                      <a href="#film-transcript" data-open-transcript
+                        >Read the transcript</a
+                      >
+                    </p>
+                  </div>
+
+                  <div class="cs-shotlist">
+                    <h3 id="route-title" tabindex="-1">A 60-second route</h3>
+                    <p class="cs-shotlist__intro">
+                      If you would rather try it than watch it, this is the
+                      shortest path through the demo.
+                    </p>
+                    <ol class="cs-shots" aria-labelledby="route-title">
+                      <li>
+                        <p class="cs-shots__time">0:00 to 0:08</p>
+                        <div>
+                          <h4>Open on the live preview.</h4>
+                          <dl>
+                            <div>
+                              <dt>Do this</dt>
+                              <dd>
+                                Load the demo at 1440 &times; 900. Leave the
+                                pointer still.
+                              </dd>
+                            </div>
+                            <div>
+                              <dt>Notice</dt>
+                              <dd>
+                                Northstar breathes. The endpoint pulses, the LIVE
+                                dot blinks, and a scan crosses the chart.
+                              </dd>
+                            </div>
+                          </dl>
+                        </div>
+                      </li>
+                      <li>
+                        <p class="cs-shots__time">0:08 to 0:16</p>
+                        <div>
+                          <h4>Press the shutter.</h4>
+                          <dl>
+                            <div>
+                              <dt>Do this</dt>
+                              <dd>Click the shutter or press C.</dd>
+                            </div>
+                            <div>
+                              <dt>Notice</dt>
+                              <dd>
+                                The flash fires, the live loop stops, and the
+                                frozen bitmap takes over. The prompt asks for a
+                                selection.
+                              </dd>
+                            </div>
+                          </dl>
+                        </div>
+                      </li>
+                      <li>
+                        <p class="cs-shots__time">0:16 to 0:28</p>
+                        <div>
+                          <h4>Select the chart and the notes.</h4>
+                          <dl>
+                            <div>
+                              <dt>Do this</dt>
+                              <dd>
+                                Drag from the top of the signal chart to the
+                                bottom of the review notes.
+                              </dd>
+                            </div>
+                            <div>
+                              <dt>Notice</dt>
+                              <dd>
+                                Everything outside dims. Eight handles appear.
+                                The tag reports 1022 &times; 393.
+                              </dd>
+                            </div>
+                          </dl>
+                        </div>
+                      </li>
+                      <li>
+                        <p class="cs-shots__time">0:28 to 0:42</p>
+                        <div>
+                          <h4>Add three marks.</h4>
+                          <dl>
+                            <div>
+                              <dt>Do this</dt>
+                              <dd>
+                                Arrow to the peak. Box the note. Blur the email
+                                line.
+                              </dd>
+                            </div>
+                            <div>
+                              <dt>Notice</dt>
+                              <dd>
+                                The arrow gets an ice stroke and a dark halo.
+                                The box frames the note. The email becomes a
+                                mosaic built from the pixels underneath.
+                              </dd>
+                            </div>
+                          </dl>
+                        </div>
+                      </li>
+                      <li>
+                        <p class="cs-shots__time">0:42 to 0:50</p>
+                        <div>
+                          <h4>Copy, then paste.</h4>
+                          <dl>
+                            <div>
+                              <dt>Do this</dt>
+                              <dd>
+                                Click Copy and paste into any editor. Download
+                                also works.
+                              </dd>
+                            </div>
+                            <div>
+                              <dt>Notice</dt>
+                              <dd>
+                                The clipboard gets the clean crop at source
+                                resolution. The veil, handles, and toolbar are
+                                not in the file.
+                              </dd>
+                            </div>
+                          </dl>
+                        </div>
+                      </li>
+                      <li>
+                        <p class="cs-shots__time">0:50 to 1:00</p>
+                        <div>
+                          <h4>Exit and repeat.</h4>
+                          <dl>
+                            <div>
+                              <dt>Do this</dt>
+                              <dd>Press Esc or Exit. Capture again.</dd>
+                            </div>
+                            <div>
+                              <dt>Notice</dt>
+                              <dd>
+                                The live preview resumes. The mute setting
+                                survives a reload. The frozen image never left
+                                the tab.
+                              </dd>
+                            </div>
+                          </dl>
+                        </div>
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+
+                <details class="cs-transcript" id="film-transcript">
+                  <summary>
+                    <span>Read the transcript</span>
+                    <span class="cs-transcript__meta">10 chapters</span>
+                  </summary>
+                  <ol class="cs-transcript__list">
+                    <li>
+                      <p class="cs-transcript__time">0:01</p>
+                      <div>
+                        <h4>The page is the screenshot</h4>
+                        <p>
+                          This page has a screenshot tool inside it. On the
+                          right is a live app, drawn on a canvas. Press the
+                          shutter, and the drawing freezes into a picture. Then
+                          you mark it up without leaving the tab.
+                        </p>
+                      </div>
+                    </li>
+                    <li>
+                      <p class="cs-transcript__time">0:17</p>
+                      <div>
+                        <h4>The freeze</h4>
+                        <p>
+                          The preview is not an image. It is a canvas, painted
+                          fresh thirty times a second. The shutter copies its
+                          pixels at device resolution into a second canvas. The
+                          backing bitmap is capped at two and a half times the
+                          CSS size. The live layer fades, and the copy takes its
+                          place.
+                        </p>
+                      </div>
+                    </li>
+                    <li>
+                      <p class="cs-transcript__time">0:38</p>
+                      <div>
+                        <h4>The selection</h4>
+                        <p>
+                          The frozen canvas becomes an editor. Drag a rectangle,
+                          and everything outside it dims. Eight handles resize
+                          it, and a tag reports the pixel size. The rectangle is
+                          stored as fractions, so it survives a resize.
+                        </p>
+                      </div>
+                    </li>
+                    <li>
+                      <p class="cs-transcript__time">0:55</p>
+                      <div>
+                        <h4>Three marks</h4>
+                        <p>
+                          Three tools mark up the capture. Arrow points. Box
+                          frames. Blur redacts with a mosaic built from the
+                          frozen pixels underneath. Each mark is stored as
+                          geometry, not baked into the image. It redraws cleanly
+                          at any size.
+                        </p>
+                      </div>
+                    </li>
+                    <li>
+                      <p class="cs-transcript__time">1:15</p>
+                      <div>
+                        <h4>The clean copy</h4>
+                        <p>
+                          Copy and Download do not read the screen. They build a
+                          clean canvas from the frozen bitmap. Annotations go on
+                          top, and the selection becomes the crop. The veil, the
+                          handles, and the toolbar are left behind. What you get
+                          is a PNG at native resolution.
+                        </p>
+                      </div>
+                    </li>
+                    <li>
+                      <p class="cs-transcript__time">1:37</p>
+                      <div>
+                        <h4>Made from scratch</h4>
+                        <p>
+                          The shutter has a sound, but there is no audio file.
+                          It is filtered noise, a low thump, and a click. The
+                          copy chime is three sine notes. A soft error tone
+                          plays if the clipboard refuses. The audio engine
+                          starts inside your click, so nothing autoplays.
+                        </p>
+                      </div>
+                    </li>
+                    <li>
+                      <p class="cs-transcript__time">2:00</p>
+                      <div>
+                        <h4>The clock</h4>
+                        <p>
+                          The preview breathes at about thirty frames a second.
+                          The endpoint pulses, the LIVE dot blinks, and a scan
+                          crosses the chart. Hide the tab, or scroll away, and
+                          the loop stops. Freeze the image, and the clock stops
+                          with it.
+                        </p>
+                      </div>
+                    </li>
+                    <li>
+                      <p class="cs-transcript__time">2:17</p>
+                      <div>
+                        <h4>Nothing to download</h4>
+                        <p>
+                          The preview, the icons, and the sounds are all code.
+                          No image files. No audio files. No UI library. Only
+                          the fonts come from outside. The app is drawn, not
+                          screenshotted. So the demo can capture itself with no
+                          server in the loop.
+                        </p>
+                      </div>
+                    </li>
+                    <li>
+                      <p class="cs-transcript__time">2:38</p>
+                      <div>
+                        <h4>The quiet defaults</h4>
+                        <p>
+                          The capture still works when the motion stops.
+                          Reduced motion removes the flash, the shake, and the
+                          entrances. The freeze becomes a fade, and every tool
+                          still works. Keyboard users get C, V, A, R, B, and
+                          Escape. The layout holds on a phone.
+                        </p>
+                      </div>
+                    </li>
+                    <li>
+                      <p class="cs-transcript__time">2:54</p>
+                      <div>
+                        <h4>The page is the screenshot</h4>
+                        <p>
+                          A page that can see itself. A screenshot you never
+                          have to leave. The pixels stay in the tab. The page is
+                          the screenshot.
+                        </p>
+                      </div>
+                    </li>
+                  </ol>
+                  <p class="cs-transcript__note">
+                    The film has no burned-in captions. This transcript carries
+                    the narration.
+                  </p>
+                </details>
+              </div>
+            </section>
+
+            <section
+              class="cs-section"
+              id="architecture"
+              aria-labelledby="architecture-title"
+            >
+              <div class="cs-section__aside">
+                <span class="cs-section__number">04</span>
+                <p class="cs-kicker">How it works</p>
+              </div>
+              <div class="cs-section__body">
+                <h2 id="architecture-title">The freeze is the architecture.</h2>
+                <p class="cs-lede">
+                  There is no server, no scene graph, and no second copy of the
+                  interface. Four moves carry the whole prototype.
+                </p>
+
+                <div
+                  class="cs-pipeline"
+                  role="img"
+                  aria-label="The live canvas is copied into a frozen bitmap, which is composed with marks into an export canvas, then encoded as a PNG."
+                >
+                  <div class="cs-pipeline__node">
+                    <span>01</span>
+                    <strong>Live canvas</strong>
+                    <small>PreviewRenderer, ~30 fps, up to 2.5&times;</small>
+                  </div>
+                  <span class="cs-pipeline__arrow" aria-hidden="true">&rarr;</span>
+                  <div class="cs-pipeline__node">
+                    <span>02</span>
+                    <strong>Frozen bitmap</strong>
+                    <small>Offscreen copy at backing-store size</small>
+                  </div>
+                  <span class="cs-pipeline__arrow" aria-hidden="true">&rarr;</span>
+                  <div class="cs-pipeline__node">
+                    <span>03</span>
+                    <strong>Export canvas</strong>
+                    <small>Frozen image plus marks, cropped</small>
+                  </div>
+                  <span class="cs-pipeline__arrow" aria-hidden="true">&rarr;</span>
+                  <div class="cs-pipeline__node">
+                    <span>04</span>
+                    <strong>PNG</strong>
+                    <small>Clipboard or local download</small>
+                  </div>
+                </div>
+
+                <ol class="cs-steps">
+                  <li>
+                    <span class="cs-steps__number" aria-hidden="true">01</span>
+                    <div>
+                      <h3>The preview is code.</h3>
+                      <p>
+                        PreviewRenderer paints Northstar with Canvas 2D. It
+                        targets roughly 30 fps, pauses when the tab is hidden or
+                        the station leaves the viewport, and renders a static
+                        frame under reduced motion.
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="cs-steps__number" aria-hidden="true">02</span>
+                    <div>
+                      <h3>The shutter copies the backing store.</h3>
+                      <p>
+                        startCapture() refreshes the preview, stops the loop,
+                        and passes the live canvas to the editor. The editor
+                        copies it into an offscreen canvas at the full
+                        backing-store size. No DOM is rasterized and no pixels
+                        are re-rendered.
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="cs-steps__number" aria-hidden="true">03</span>
+                    <div>
+                      <h3>Selection and marks are fractions.</h3>
+                      <p>
+                        The rectangle and every mark are stored in normalized 0
+                        to 1 coordinates. The display canvas composites the
+                        frozen image, a dimming veil, the bright cutout, the
+                        marks, and the selection chrome. Resize the stage and
+                        the geometry still lines up.
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="cs-steps__number" aria-hidden="true">04</span>
+                    <div>
+                      <h3>Export starts from the source.</h3>
+                      <p>
+                        buildExportCanvas() paints the frozen bitmap and the
+                        marks into a clean canvas at native resolution, crops to
+                        the selection if there is one, and returns it. Copy and
+                        Download encode that canvas. The screen composition is
+                        never the source.
+                      </p>
+                    </div>
+                  </li>
+                </ol>
+
+                <div class="cs-code">
+                  <p class="cs-code__label">The copy and the export</p>
+                  <pre><code>// Copy the live backing store into the frozen bitmap.
+beginCapture(source: HTMLCanvasElement) {
+  this.frozen.width = source.width;
+  this.frozen.height = source.height;
+  this.frozenCtx.drawImage(source, 0, 0);
+  this.captureScale = this.frozen.width / this.stage.clientWidth;
+}
+
+// Paint the source and the marks, then crop to the selection.
+const png = editor.buildExportCanvas();</code></pre>
+                </div>
+
+                <p>
+                  The stage chrome reports the backing-store size and the
+                  effective DPR. The frozen image stays intact while the live
+                  layer is hidden, which is why the editor can survive a resize
+                  without recapturing.
+                </p>
+
+                <div class="cs-contact">
+                  <figure>
+                    <div class="cs-contact__frame">
+                      <img
+                        src="%BASE_URL%case-study/live.webp"
+                        alt="The live Northstar preview, with a chart, metric cards, and review notes."
+                        width="1432"
+                        height="894"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                    <figcaption><span>01</span> Live</figcaption>
+                  </figure>
+                  <figure>
+                    <div class="cs-contact__frame">
+                      <img
+                        src="%BASE_URL%case-study/frozen.webp"
+                        alt="The same preview after the freeze, with the live animation stopped."
+                        width="1432"
+                        height="894"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                    <figcaption><span>02</span> Frozen</figcaption>
+                  </figure>
+                  <figure>
+                    <div class="cs-contact__frame">
+                      <img
+                        src="%BASE_URL%case-study/selected.webp"
+                        alt="A rectangular selection over the chart and review notes, with the rest of the image dimmed and eight resize handles."
+                        width="1432"
+                        height="894"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                    <figcaption><span>03</span> Selected</figcaption>
+                  </figure>
+                  <figure>
+                    <div class="cs-contact__frame">
+                      <img
+                        src="%BASE_URL%case-study/marked.webp"
+                        alt="The frozen preview with an arrow, a box, and a blurred email line, plus the annotation toolbar."
+                        width="1432"
+                        height="894"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                    <figcaption><span>04</span> Marked</figcaption>
+                  </figure>
+                </div>
+                <p class="cs-small">
+                  Four states, one stage. The contact sheet is made from real
+                  captures at 2&times;, not mockups.
+                </p>
+              </div>
+            </section>
+
+            <section class="cs-section" id="marks" aria-labelledby="marks-title">
+              <div class="cs-section__aside">
+                <span class="cs-section__number">05</span>
+                <p class="cs-kicker">The marks</p>
+              </div>
+              <div class="cs-section__body">
+                <h2 id="marks-title">
+                  Three marks, drawn from the pixels underneath.
+                </h2>
+                <p class="cs-lede">
+                  Arrow, box, and pixel blur. Each one is geometry, not a
+                  baked-in edit, so it redraws at any size and in the export.
+                </p>
+                <p>
+                  The arrow and the box are strokes with a dark halo under an
+                  ice line, so they read over bright and dark captures. The blur
+                  is not a CSS filter over the live app. It downsamples the
+                  selected region of the frozen bitmap into a small grid, then
+                  scales it back with smoothing off. The mosaic can only reveal
+                  pixels that are already in the capture.
+                </p>
+                <p>
+                  Because the marks live in normalized space, they survive a
+                  resize and they scale to the source bitmap at export. The
+                  display composition and the file composition share the same
+                  geometry.
+                </p>
+
+                <figure class="cs-figure">
+                  <div class="cs-frame">
+                    <img
+                      src="%BASE_URL%case-study/marked.webp"
+                      alt="The frozen stage with a selection around the chart and notes, an arrow pointing to the chart peak, a box around a review note, and a blurred email line."
+                      width="1432"
+                      height="894"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <figcaption>
+                    One selection and three marks on the frozen stage. The
+                    toolbar sits inside the stage, so the same surface does the
+                    editing.
+                  </figcaption>
+                </figure>
+
+                <div class="cs-cols">
+                  <div>
+                    <h3>What each mark is made of.</h3>
+                    <dl class="cs-specs">
+                      <div>
+                        <dt>Arrow</dt>
+                        <dd>
+                          <strong>2.4px ice stroke</strong>
+                          <span>over a 5.4px dark halo, round caps</span>
+                        </dd>
+                      </div>
+                      <div>
+                        <dt>Box</dt>
+                        <dd>
+                          <strong>2.1px stroke</strong>
+                          <span>with a 5.5 percent fill and a 2.5px radius</span>
+                        </dd>
+                      </div>
+                      <div>
+                        <dt>Blur</dt>
+                        <dd>
+                          <strong>2 to 90 cells per side</strong>
+                          <span>sampled from the frozen bitmap, not the screen</span>
+                        </dd>
+                      </div>
+                    </dl>
+                  </div>
+
+                  <figure class="cs-figure cs-figure--export">
+                    <div class="cs-frame cs-frame--file">
+                      <div class="cs-frame__bar">
+                        <span>In the file</span>
+                        <span>1022 &times; 393</span>
+                      </div>
+                      <img
+                        src="%BASE_URL%case-study/export.webp"
+                        alt="The exported PNG crop: the chart with the arrow, and the review note with the box and the blurred email line."
+                        width="1024"
+                        height="394"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                    <figcaption>
+                      The exported crop at source resolution. The veil, handles,
+                      and toolbar are not included.
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </section>
+
+            <section
+              class="cs-section"
+              id="performance"
+              aria-labelledby="performance-title"
+            >
+              <div class="cs-section__aside">
+                <span class="cs-section__number">06</span>
+                <p class="cs-kicker">Performance</p>
+              </div>
+              <div class="cs-section__body">
+                <h2 id="performance-title">
+                  Nothing moves until something changes.
+                </h2>
+                <p class="cs-lede">
+                  The preview is an ambient loop, not a game. It runs at about
+                  30 fps, stops when it is not visible, and stops again when the
+                  shutter fires.
+                </p>
+
+                <dl class="cs-stats">
+                  <div>
+                    <dt>Backing-store cap</dt>
+                    <dd><strong>2.5&times;</strong><span>CSS size</span></dd>
+                  </div>
+                  <div>
+                    <dt>Preview</dt>
+                    <dd><strong>~30 fps</strong><span>ambient loop</span></dd>
+                  </div>
+                  <div>
+                    <dt>While captured</dt>
+                    <dd><strong>0</strong><span>render loops</span></dd>
+                  </div>
+                  <div>
+                    <dt>Mark tools</dt>
+                    <dd><strong>3</strong><span>arrow, box, blur</span></dd>
+                  </div>
+                  <div>
+                    <dt>Resize handles</dt>
+                    <dd><strong>8</strong><span>one selection</span></dd>
+                  </div>
+                  <div>
+                    <dt>Bytes uploaded</dt>
+                    <dd><strong>0</strong><span>clipboard or file</span></dd>
+                  </div>
+                </dl>
+
+                <p>
+                  During a capture the loop stops before the copy, so the frozen
+                  frame and the live frame cannot disagree. The export is a
+                  synchronous composite over one bitmap. There is no network
+                  request in the path.
+                </p>
+                <p>
+                  The film&rsquo;s clock chapter follows the same rule: one
+                  requestAnimationFrame pulse feeds the endpoint, the LIVE dot,
+                  and the chart scan. Hide the tab or scroll the station away
+                  and the pulse stops. Freeze the image and the clock stops with
+                  it.
+                </p>
+                <p class="cs-note">
+                  The numbers here are design constants and budgets from the
+                  build, not a published benchmark. A frame trace on a mid-range
+                  laptop is still to come. The target is a steady 30 fps preview
+                  and a capture that finishes inside one interaction, with no
+                  long task over 50 ms.
+                </p>
+              </div>
+            </section>
+
+            <section class="cs-section" id="access" aria-labelledby="access-title">
+              <div class="cs-section__aside">
+                <span class="cs-section__number">07</span>
+                <p class="cs-kicker">Accessibility</p>
+              </div>
+              <div class="cs-section__body">
+                <h2 id="access-title">Every control is a real control.</h2>
+                <p class="cs-lede">
+                  The canvas is the picture. The interface around it is ordinary
+                  HTML, and the keyboard path is not an afterthought.
+                </p>
+
+                <ul class="cs-list cs-list--tight">
+                  <li>
+                    <strong>Buttons, not divs.</strong> The shutter, toolbar,
+                    Copy, Download, Reset, and Exit are buttons with names. The
+                    toolbar takes ArrowLeft, ArrowRight, Home, and End. Focus
+                    moves to the snapshot after a capture.
+                  </li>
+                  <li>
+                    <strong>The shortcuts have equivalents.</strong> C captures.
+                    V, A, R, and B choose Select, Arrow, Box, and Blur. Esc
+                    exits. Every key has a visible control.
+                  </li>
+                  <li>
+                    <strong>The live region narrates.</strong> Captures,
+                    selection sizes, marks, clipboard results, and exits are
+                    announced. The preview canvas has a role and a name, and the
+                    snapshot is labeled and focusable.
+                  </li>
+                  <li>
+                    <strong>Motion is optional.</strong> Reduced motion removes
+                    the flash, the stage kick, and the entrance animations.
+                    Every tool still works, and the freeze becomes a fade.
+                  </li>
+                  <li>
+                    <strong>Sound waits for intent.</strong> The shutter and
+                    chime are synthesized with Web Audio inside a user gesture.
+                    Mute is remembered. Nothing autoplays.
+                  </li>
+                  <li>
+                    <strong>The phone layout holds.</strong> At 390 &times; 844
+                    the stage stacks, the toolbar becomes icon-only, and touch
+                    dragging still works. Every tool is still reachable.
+                  </li>
+                </ul>
+
+                <div class="cs-keys" role="group" aria-label="Keyboard shortcuts">
+                  <div><kbd>C</kbd><span>Capture</span></div>
+                  <div><kbd>V</kbd><span>Select</span></div>
+                  <div><kbd>A</kbd><span>Arrow</span></div>
+                  <div><kbd>R</kbd><span>Box</span></div>
+                  <div><kbd>B</kbd><span>Blur</span></div>
+                  <div><kbd>Esc</kbd><span>Exit</span></div>
+                </div>
+                <p class="cs-small">
+                  Every shortcut has a visible control in the toolbar or the
+                  station.
+                </p>
+              </div>
+            </section>
+
+            <section class="cs-section" id="limits" aria-labelledby="limits-title">
+              <div class="cs-section__aside">
+                <span class="cs-section__number">08</span>
+                <p class="cs-kicker">Limitations</p>
+              </div>
+              <div class="cs-section__body">
+                <h2 id="limits-title">What this does not claim.</h2>
+                <p class="cs-lede">
+                  A prototype is more convincing when it says where the edges
+                  are. These are the current ones.
+                </p>
+
+                <div class="cs-cols">
+                  <ul class="cs-list cs-list--tight">
+                    <li>
+                      It captures its own canvas, not the full page or the
+                      operating system. That limit is the reason the demo is
+                      honest and the reason it is not a general screenshot tool
+                      yet.
+                    </li>
+                    <li>
+                      There is no per-mark undo. Reset discards the whole
+                      capture.
+                    </li>
+                    <li>
+                      Text callouts, movable annotations, and color choices are
+                      not implemented.
+                    </li>
+                    <li>
+                      Resizing during a capture stretches the frozen bitmap to
+                      the new stage aspect. The geometry survives; the pixels do
+                      not.
+                    </li>
+                    <li>
+                      Copy needs the Async Clipboard API and a secure context.
+                      When the clipboard blocks an image write, Copy downloads
+                      the PNG instead and says so.
+                    </li>
+                    <li>
+                      There is no automated test suite yet.
+                      <code>npm run build</code> runs the TypeScript check.
+                    </li>
+                    <li>
+                      The film is finished. The product&rsquo;s in-page guided
+                      tour is not.
+                    </li>
+                  </ul>
+
+                  <figure class="cs-figure cs-figure--mobile">
+                    <div class="cs-frame">
+                      <img
+                        src="%BASE_URL%case-study/mobile.webp"
+                        alt="The Capture stage at a 390 pixel wide viewport. The analytics preview is stacked, the toolbar is icon-only, and the shutter sits below the stage."
+                        width="716"
+                        height="758"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                    <figcaption>
+                      The station at 390 &times; 844. The stage stacks, the
+                      toolbar goes icon-only, and the shutter stays a shutter.
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            </section>
+
+            <section class="cs-section" id="next" aria-labelledby="next-title">
+              <div class="cs-section__aside">
+                <span class="cs-section__number">09</span>
+                <p class="cs-kicker">What is next</p>
+              </div>
+              <div class="cs-section__body">
+                <h2 id="next-title">
+                  The next version should close the distance to a real tool.
+                </h2>
+                <p class="cs-lede">
+                  The prototype has proven the interaction. The remaining work
+                  is resilience, range, and evidence.
+                </p>
+
+                <ol class="cs-next">
+                  <li>
+                    <span aria-hidden="true">01</span>
+                    <div>
+                      <h3>Undo and selectable marks</h3>
+                      <p>
+                        A per-mark history, with the ability to move or delete
+                        one mark without resetting the capture.
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <span aria-hidden="true">02</span>
+                    <div>
+                      <h3>Text and color</h3>
+                      <p>
+                        Short callouts and a small palette, without turning the
+                        toolbar into a design app.
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <span aria-hidden="true">03</span>
+                    <div>
+                      <h3>A full-page path</h3>
+                      <p>
+                        Capture a taller surface than the stage canvas, then
+                        keep the same normalized editor. This is a different
+                        compositor, not a CSS tweak.
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <span aria-hidden="true">04</span>
+                    <div>
+                      <h3>A real share sheet</h3>
+                      <p>
+                        The Download link is a placeholder today. Replace it
+                        with a desktop handoff or a save flow that matches the
+                        local promise.
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <span aria-hidden="true">05</span>
+                    <div>
+                      <h3>A test suite</h3>
+                      <p>
+                        Cover normalized geometry, crop bounds, export size,
+                        keyboard behavior, and the clipboard fallback.
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <span aria-hidden="true">06</span>
+                    <div>
+                      <h3>A frame trace</h3>
+                      <p>
+                        Measure paint counts and frame pacing on a mid-range
+                        laptop, then publish the numbers beside the current
+                        budgets.
+                      </p>
+                    </div>
+                  </li>
+                </ol>
+              </div>
+            </section>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="cs-footer">
+      <div class="cs-shell cs-footer__inner">
+        <div>
+          <p class="cs-footer__mark">Capture</p>
+          <p class="cs-footer__note">
+            A prototype, not a product. Northstar is fictional. Built with
+            TypeScript, Vite, Canvas 2D, and Web Audio. The film is built around
+            real captures at 2&times;. Fonts: Inter and JetBrains Mono. Score:
+            &ldquo;tech&rdquo; by Vincent Schmalbach, MIT licensed.
+          </p>
+        </div>
+        <div class="cs-footer__links">
+          <a class="cs-back" href="../">
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              <path d="M10.5 3.5 6 8l4.5 4.5" />
+            </svg>
+            <span>Back to the demo</span>
+          </a>
+          <a
+            class="cs-small cs-footer__link"
+            href="https://github.com/jimmerioles/capture"
+            target="_blank"
+            rel="noreferrer"
+            >Source on GitHub</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/case-study.ts"></script>
+  </body>
+</html>

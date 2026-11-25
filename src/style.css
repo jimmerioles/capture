@@ -1885,6 +1885,12 @@ h1 {
   }
 }
 
+@media (max-width: 480px) {
+  .nav-download {
+    display: none;
+  }
+}
+
 @media (max-width: 390px) {
   .site-nav {
     gap: 11px;
