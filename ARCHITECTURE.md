@@ -14,7 +14,8 @@ Capture is a static Vite app with one page and no runtime framework. The interes
 | File | Role |
 | --- | --- |
 | `src/preview.ts` | The canvas-drawn Northstar app, ambient animation, and visibility-aware animation loop. |
-| `src/editor.ts` | Capture state, normalized selection geometry, annotation drawing, mosaic blur, and native-resolution PNG composition. |
+| `src/editor.ts` | Capture state, annotation drawing, mosaic blur, and native-resolution PNG composition. |
+| `src/geometry.ts` | Pure selection normalization, resize handles, minimum sizes, and export crop bounds. |
 | `src/audio.ts` | The Web Audio shutter, chime, and error sounds, plus mute state. |
 | `src/main.ts` | DOM wiring, shutter and reset flow, clipboard and download handling, toasts, dialog, keyboard shortcuts, and accessibility announcements. |
 | `src/style.css` | Layout, identity, physical shutter, crop marks, glass toolbar, responsive rules, and reduced-motion treatment. |
@@ -39,6 +40,10 @@ The shutter is a real button, the toolbar supports arrow-key navigation, and an 
 - There is no per-mark undo. Reset discards the whole capture.
 - The prototype captures its own canvas, not the full page or the OS.
 - Image clipboard support varies by browser and requires a secure context.
+
+## Tests
+
+`tests/unit/geometry.test.ts` covers the pure selection and crop math in `src/geometry.ts`. `tests/e2e/` drives the real page in Chromium for capture, selection, export, keyboard, and clipboard fallback behavior. See the README for commands.
 
 ## Case study
 

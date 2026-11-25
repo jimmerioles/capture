@@ -49,7 +49,9 @@ A DPR-scaled Canvas 2D scene, a frozen bitmap copied from it, and a second canva
 
 ## Tests
 
-No automated test suite yet. `npm run build` runs the TypeScript check.
+- `npm test` runs the Vitest suite for selection geometry, resize handles, and export crop bounds.
+- `npm run test:e2e` runs the Playwright flows in Chromium: full capture, selection crop and resize, annotation export, keyboard shortcuts, and clipboard fallback. The first run needs `npx playwright install chromium`; the suite starts its own Vite server on port 4273.
+- `npm run build` runs the TypeScript check.
 
 ## Limits
 

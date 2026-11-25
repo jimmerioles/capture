@@ -1,8 +1,15 @@
-export type Tool = "select" | "arrow" | "box" | "blur";
+import {
+  clamp,
+  cropRect,
+  hitHandle,
+  normalizeRect,
+  resizeSelection,
+  type Point,
+  type Rect,
+  type ResizeHandle,
+} from "./geometry.ts";
 
-type Point = { x: number; y: number };
-type Rect = { x: number; y: number; w: number; h: number };
-type ResizeHandle = "nw" | "n" | "ne" | "e" | "se" | "s" | "sw" | "w";
+export type Tool = "select" | "arrow" | "box" | "blur";
 
 type Annotation =
   | { kind: "arrow"; a: Point; b: Point }
@@ -32,21 +39,6 @@ type CaptureEditorOptions = {
 
 const ICE = "#7fe7ff";
 const DARK_INK = "rgba(3, 8, 16, 0.62)";
-
-function clamp(value: number, min: number, max: number): number {
-  return Math.min(max, Math.max(min, value));
-}
-
-function normalizeRect(a: Point, b: Point): Rect {
-  const x = Math.min(a.x, b.x);
-  const y = Math.min(a.y, b.y);
-  return {
-    x,
-    y,
-    w: Math.abs(b.x - a.x),
-    h: Math.abs(b.y - a.y),
-  };
-}
 
 function roundRectPath(
   ctx: CanvasRenderingContext2D,
@@ -217,27 +209,14 @@ export class CaptureEditor {
 
     if (!this.selection) return composite;
 
-    const sx = clamp(Math.floor(this.selection.x * frozenW), 0, frozenW - 1);
-    const sy = clamp(Math.floor(this.selection.y * frozenH), 0, frozenH - 1);
-    const ex = clamp(
-      Math.ceil((this.selection.x + this.selection.w) * frozenW),
-      sx + 1,
-      frozenW,
-    );
-    const ey = clamp(
-      Math.ceil((this.selection.y + this.selection.h) * frozenH),
-      sy + 1,
-      frozenH,
-    );
-    const cropW = Math.max(1, ex - sx);
-    const cropH = Math.max(1, ey - sy);
+    const { sx, sy, sw, sh } = cropRect(this.selection, frozenW, frozenH);
 
     const crop = document.createElement("canvas");
-    crop.width = cropW;
-    crop.height = cropH;
+    crop.width = sw;
+    crop.height = sh;
     const cropCtx = crop.getContext("2d");
     if (!cropCtx) return composite;
-    cropCtx.drawImage(composite, sx, sy, cropW, cropH, 0, 0, cropW, cropH);
+    cropCtx.drawImage(composite, sx, sy, sw, sh, 0, 0, sw, sh);
     return crop;
   }
 
@@ -307,7 +286,9 @@ export class CaptureEditor {
     }
 
     if (this.tool === "select") {
-      const handle = this.selection ? this.hitHandle(point) : null;
+      const handle = this.selection
+        ? hitHandle(this.selection, point, this.canvas.getBoundingClientRect())
+        : null;
       if (handle && this.selection) {
         this.resizing = { handle, origin: { ...this.selection } };
         this.draft = null;
@@ -335,10 +316,11 @@ export class CaptureEditor {
     }
 
     if (this.resizing && this.selection) {
-      this.selection = this.resizeSelection(
+      this.selection = resizeSelection(
         this.resizing.origin,
         this.resizing.handle,
         point,
+        this.canvas.getBoundingClientRect(),
       );
       this.schedule();
       return;
@@ -438,81 +420,17 @@ export class CaptureEditor {
     this.options.onAnnounce?.(`Selected ${pxW} by ${pxH} pixels.`);
   }
 
-  private hitHandle(point: Point): ResizeHandle | null {
-    const selection = this.selection;
-    if (!selection) return null;
-    const rect = this.canvas.getBoundingClientRect();
-    const thresholdX = 9 / Math.max(1, rect.width);
-    const thresholdY = 9 / Math.max(1, rect.height);
-    const right = selection.x + selection.w;
-    const bottom = selection.y + selection.h;
-    const nearLeft = Math.abs(point.x - selection.x) <= thresholdX;
-    const nearRight = Math.abs(point.x - right) <= thresholdX;
-    const nearTop = Math.abs(point.y - selection.y) <= thresholdY;
-    const nearBottom = Math.abs(point.y - bottom) <= thresholdY;
-    const insideX =
-      point.x >= selection.x - thresholdX && point.x <= right + thresholdX;
-    const insideY =
-      point.y >= selection.y - thresholdY && point.y <= bottom + thresholdY;
-
-    if (nearLeft && nearTop) return "nw";
-    if (nearRight && nearTop) return "ne";
-    if (nearRight && nearBottom) return "se";
-    if (nearLeft && nearBottom) return "sw";
-    if (nearTop && insideX) return "n";
-    if (nearRight && insideY) return "e";
-    if (nearBottom && insideX) return "s";
-    if (nearLeft && insideY) return "w";
-    return null;
-  }
-
-  private resizeSelection(
-    origin: Rect,
-    handle: ResizeHandle,
-    point: Point,
-  ): Rect {
-    let left = origin.x;
-    let right = origin.x + origin.w;
-    let top = origin.y;
-    let bottom = origin.y + origin.h;
-
-    if (handle.includes("w")) left = point.x;
-    if (handle.includes("e")) right = point.x;
-    if (handle.includes("n")) top = point.y;
-    if (handle.includes("s")) bottom = point.y;
-
-    const minW = 10 / Math.max(1, this.canvas.getBoundingClientRect().width);
-    const minH = 10 / Math.max(1, this.canvas.getBoundingClientRect().height);
-
-    if (right - left < minW) {
-      if (handle.includes("w")) left = right - minW;
-      else right = left + minW;
-    }
-    if (bottom - top < minH) {
-      if (handle.includes("n")) top = bottom - minH;
-      else bottom = top + minH;
-    }
-
-    left = clamp(left, 0, 1);
-    right = clamp(right, 0, 1);
-    top = clamp(top, 0, 1);
-    bottom = clamp(bottom, 0, 1);
-
-    return {
-      x: Math.min(left, right),
-      y: Math.min(top, bottom),
-      w: Math.abs(right - left),
-      h: Math.abs(bottom - top),
-    };
-  }
-
   private updateCursor(point: Point | null): void {
     if (!this.active) {
       this.canvas.style.cursor = "";
       return;
     }
     if (point && this.tool === "select" && this.selection) {
-      const handle = this.hitHandle(point);
+      const handle = hitHandle(
+        this.selection,
+        point,
+        this.canvas.getBoundingClientRect(),
+      );
       if (handle) {
         this.canvas.style.cursor = cursorForHandle(handle);
         return;
