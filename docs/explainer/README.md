@@ -4,7 +4,7 @@ A 3:09 film about one shutter press. It is built at 1920 × 1080, 30 fps, H.264 
 
 The MP4 is a build artifact and is not committed. The README player is a GitHub user attachment, and the [explainer-v1 release](https://github.com/jimmerioles/capture/releases/tag/explainer-v1) carries the download.
 
-The current master opens on the poster frame for 2.5 seconds, crossfades for 0.5 seconds, then continues with the original film at 2.5 seconds. Audio stays at zero, so the duration and chapter timings are unchanged.
+The current master opens on a 1920 × 1080 screenshot of the product demo for 2.5 seconds, crossfades for 0.5 seconds, then continues with the original film at 2.5 seconds. Audio stays at zero, so the duration and chapter timings are unchanged.
 
 ## Chapters
 
@@ -39,7 +39,7 @@ The current master opens on the poster frame for 2.5 seconds, crossfades for 0.5
 | `capture.mjs` | Real captures of the page at 2× |
 | `assets.js` | Generated capture assets |
 | `music.m4a` | The score |
-| `poster.jpg` | The 1920 × 1080 poster frame |
+| `poster.jpg` | The 1920 × 1080 product demo frame |
 
 ## Rebuild
 
