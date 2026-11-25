@@ -39,7 +39,7 @@ npm run preview  # serve the production build
 | Download | Saves the selection or full capture as PNG |
 | Exit | `Esc`, Reset, or Exit |
 
-On phones the toolbar becomes icon-only.
+The header has a sound toggle and an in-page changelog; its Download link is a placeholder for a desktop app. On phones the toolbar becomes icon-only.
 
 ## How it works
 
