@@ -4,7 +4,7 @@
 
 **Live demo:** https://jimmerioles.github.io/capture/
 
-https://github.com/user-attachments/assets/e9686aeb-d9c7-4dad-ba6c-7f2db5635020
+https://github.com/user-attachments/assets/fba03b95-8b0f-4b64-9eef-cec0216a7a8a
 
 Capture is one screen with a live, canvas-drawn analytics app. Press the shutter and that drawing freezes into a real bitmap; drag a selection, add arrows, boxes, or pixel blur, then copy or download a clean PNG. It is for people who want a fast, local capture tool inside the page, not another extension or upload flow.
 
